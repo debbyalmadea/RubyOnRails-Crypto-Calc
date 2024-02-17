@@ -1,9 +1,7 @@
-require "base64"
-
 class ExtendedVigenereCipherController < CipherController
   protected 
 
-  def _calculate(input, key, mode, media_type)
+  def _calculate(input, key, mode)
     result = ""
     if mode == "encrypt"
       result = ExtendedVigenereCipherService.new.encrypt(input, key)
@@ -11,6 +9,6 @@ class ExtendedVigenereCipherController < CipherController
       result = ExtendedVigenereCipherService.new.decrypt(input, key)
     end
 
-    return result, media_type
+    return result
   end
 end

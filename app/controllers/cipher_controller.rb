@@ -34,9 +34,9 @@ class CipherController < ApplicationController
             end
         end
 
-        result, media_type = _calculate(input, key, mode, media_type)
+        result, other = _calculate(input, key, mode)
 
-        render json: { base64: Base64.encode64(result), mode: mode, media_type: media_type}
+        render json: { base64: Base64.encode64(result), mode: mode, media_type: media_type, other: other}
     end
 
     protected 

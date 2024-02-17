@@ -13,5 +13,17 @@
       <li class="mb-2 <%= request.path != "/extended-vigenere-cipher" && "nav-item" %>">
         <%= link_to "Extended Vigenere Cipher", "/extended-vigenere-cipher", class: "text-white nav-link #{request.path == "/extended-vigenere-cipher" && "active"}" %>
       </li>
+      <li class="mb-2 <%= request.path != "/playfair-cipher" && "nav-item" %>">
+        <%= link_to "Playfair Cipher", "/playfair-cipher", class: "text-white nav-link #{request.path == "/playfair-cipher" && "active"}" %>
+      </li>
+      <li class="mb-2 <%= request.path != "/hill-cipher" && "nav-item" %>">
+        <%= link_to "Hill Cipher", "/hill-cipher", class: "text-white nav-link #{request.path == "/hill-cipher" && "active"}" %>
+      </li>
+      <li class="mb-2 <%= request.path != "/affine-cipher" && "nav-item" %>">
+        <%= link_to "Affine Cipher", "/affine-cipher", class: "text-white nav-link #{request.path == "/affine-cipher" && "active"}" %>
+      </li>
+      <li class="mb-2 <%= request.path != "/super-encryption" && "nav-item" %>">
+        <%= link_to "Super Encryption", "/super-encryption", class: "text-white nav-link #{request.path == "/super-encryption" && "active"}" %>
+      </li>
     </ul>
 </div>
