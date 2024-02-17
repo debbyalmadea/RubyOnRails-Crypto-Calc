@@ -9,8 +9,8 @@ Rails.application.routes.draw do
   # root "home#index"
 
   # Defines the route for the Vigenere Cipher
-  get "vigenere-cipher" => "vigenere_cipher#index"
-  post "vigenere-cipher/calculate" => "vigenere_cipher#calculate"
+  get "standard-vigenere-cipher" => "standard_vigenere_cipher#index"
+  post "standard-vigenere-cipher/calculate" => "standard_vigenere_cipher#calculate"
 
   # Defines the route for the Autokey Vigenere Cipher
   get "autokey-vigenere-cipher" => "autokey_vigenere_cipher#index"

@@ -1,0 +1,6 @@
+<% content_for :title do %>
+  Standard Vigenere Cipher
+<% end %>
+<%= render :layout => "partials/cipher_form_partial", locals: { url: "/standard-vigenere-cipher/calculate" } do %>
+   <%= render "params_field" %>
+<% end %>
