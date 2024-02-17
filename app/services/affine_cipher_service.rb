@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Service for encrypting and decrypting Affine Cipher
-class AffineService
+class AffineCipherService
   # param plain_text [String]
   # param m [Integer]
   # param b [Integer]
@@ -69,9 +69,3 @@ class AffineService
     end
   end
 end
-
-sv = AffineService.new
-plain_text = 'if i can stop one heart from breaking'
-cipher_text = sv.encrypt(plain_text, 5, 2)
-puts(cipher_text)
-puts(sv.decrypt(cipher_text, 5, 2))
