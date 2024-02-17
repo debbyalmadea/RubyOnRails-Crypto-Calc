@@ -1,0 +1,17 @@
+<div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark position-fixed" style="width: 280px; height: 100vh;">
+    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+      <span class="fs-4">RubyCrii</span>
+    </a>
+    <hr>
+    <ul class="nav nav-pills flex-column mb-auto">
+      <li class="mb-2 <%= request.path != "/vigenere-cipher" && "nav-item" %>">
+        <%= link_to "Vigenere Cipher", "/vigenere-cipher", class: "text-white nav-link #{request.path == "/vigenere-cipher" && "active"}" %>
+      </li>
+      <li class="mb-2 <%= request.path != "/autokey-vigenere-cipher" && "nav-item" %>">
+        <%= link_to "Auto-key Vigenere Cipher", "/autokey-vigenere-cipher", class: "text-white nav-link #{request.path == "/autokey-vigenere-cipher" && "active"}" %>
+      </li>
+      <li class="mb-2 <%= request.path != "/extended-vigenere-cipher" && "nav-item" %>">
+        <%= link_to "Extended Vigenere Cipher", "/extended-vigenere-cipher", class: "text-white nav-link #{request.path == "/extended-vigenere-cipher" && "active"}" %>
+      </li>
+    </ul>
+</div>

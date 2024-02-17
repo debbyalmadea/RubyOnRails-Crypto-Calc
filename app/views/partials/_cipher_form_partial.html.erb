@@ -1,0 +1,173 @@
+<%= form_with(url: url, id: "form") do |form| %>
+    <div class="form-group mb-3">
+      <%= label_tag :input_type, "Select Input Type:" %><br>
+      <%= select_tag :input_type, options_for_select(["Text", "File"], "Text"), class: "form-control", id: "type-input-wrapper", required: true %>
+    </div>
+
+    <div id="text-input-wrapper">
+      <div>
+        <%= label_tag :input_text, "Input Text:" %><br>
+        <%= text_area_tag :input_text, nil, class: "form-control", rows: 5 %><br>
+      </div>
+      <div class="form-group mb-3">
+        <%= radio_button_tag :text_type, "plain", true, class: "form-check-input" %>
+        <%= label_tag :text_type, "Plain Text" %>
+        <%= radio_button_tag :text_type, "base64", class: "form-check-input" %>
+        <%= label_tag :text_type, "Base64" %>
+      </div>
+    </div>
+
+    <div id="file-input-wrapper" style="display: none;" class="mb-3">
+       <%= label_tag :input_file, "Input File:" %><br>
+       <%= file_field_tag :input_file, class: "form-control-file" %><br>
+    </div>
+
+    <div>
+        <h4 class="mb-2">Params: </h4>
+        <%= yield %>
+    </div>
+
+    <div class="form-group mb-3">
+        <%= label_tag :mode, "Select Mode:" %><br>
+        <%= radio_button_tag :mode, "encrypt", true, class: "form-check-input" %>
+        <%= label_tag :mode, "Encrypt" %>
+        <%= radio_button_tag :mode, "decrypt", class: "form-check-input" %>
+        <%= label_tag :mode, "Decrypt" %>
+    </div>
+
+    <%= submit_tag "Calculate", class: "btn btn-primary" %>
+<% end %>
+
+<div class="mt-3">
+    <h4>Result:</h4>
+    <div id="display-options" class="my-3">
+        <%= radio_button_tag :displayFormat, 'base64', id: 'base-64-display', checked: true, class: "form-check-input" %>
+        <%= label_tag :displayFormat_base64, 'Base64', for: 'base-64-display' %>
+        <%= radio_button_tag :displayFormat, 'text', id: 'plain-text-display', class: "form-check-input" %>
+        <%= label_tag :displayFormat_text, 'Plain Text', for: 'plain-text-display' %>
+    </div>
+
+    <button id="download-button" class="btn btn-primary mb-3" style="display: none;">Download File</button>
+    <div id="result" class="border p-2"></div>
+</div>
+
+<script>    
+    var result = {
+        base64: "",
+        media_type: "",
+        media_ext: "",
+        mode: ""
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const form = document.getElementById('form');
+        const resultContainer = document.getElementById('result');
+
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
+
+            const formData = new FormData(form);
+
+            fetch(form.action, {
+                method: form.method,
+                body: formData
+            })
+            .then(response => response.json())
+            .then(json => {
+                result = json;
+                // Check the base64 display option
+                document.getElementById('base-64-display').checked = true;
+
+                resultContainer.innerHTML = json.base64;
+                document.getElementById('download-button').style.display = "block";
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+    });
+</script>
+
+<script>
+    // Show the correct input field based on the selected input type
+    document.addEventListener('DOMContentLoaded', () => {
+        const typeWrapper = document.getElementById('type-input-wrapper');
+        const textWrapper = document.getElementById('text-input-wrapper');
+        const fileWrapper = document.getElementById('file-input-wrapper');
+
+        typeWrapper.addEventListener('change', () => {
+            console.log(typeWrapper.value)
+            if (typeWrapper.value === "Text") {
+                textWrapper.style.display = "block";
+                fileWrapper.style.display = "none";
+            } else if (typeWrapper.value === "File") {
+                textWrapper.style.display = "none";
+                fileWrapper.style.display = "block";
+            }
+        });
+    });
+</script>
+
+<script>
+    // Download the file
+    document.addEventListener('DOMContentLoaded', () => {
+        const downloadButton = document.getElementById('download-button');
+
+        downloadButton.addEventListener('click', () => {
+            const mode = result.mode
+            let file;
+
+            if (mode === "encrypt") {
+                file = stringToFile(`data:${result.media_type};base64,` + result.base64, mode + '_' + (new Date()).toLocaleString() + '.bin', 'application/octet-stream');
+            } else {
+                file = base64toFile(result.base64, mode + '_' + (new Date()).toLocaleString(), result.media_type);
+            }
+
+            const url = URL.createObjectURL(file);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = file.name;
+            document.body.appendChild(a);
+            a.click();
+        });
+    });
+
+    function base64toFile(base64String, filename, mimeType) {
+        const byteCharacters = atob(base64String);
+        const byteNumbers = new Array(byteCharacters.length);
+        for (let i = 0; i < byteCharacters.length; i++) {
+            byteNumbers[i] = byteCharacters.charCodeAt(i);
+        }
+        const byteArray = new Uint8Array(byteNumbers);
+        const blob = new Blob([byteArray], { type: mimeType });
+
+        const file = new File([blob], filename, { type: mimeType });
+
+        return file;
+    }
+
+    function stringToFile(stringData, filename, mimeType) {
+        const blob = new Blob([stringData], { type: mimeType });
+
+        const file = new File([blob], filename, { type: mimeType });
+
+        return file;
+    }
+</script>
+
+<script>
+     document.addEventListener('DOMContentLoaded', () => {
+        const displayOptions = document.getElementById('display-options');
+        const resultContainer = document.getElementById('result');
+
+        displayOptions.addEventListener('change', (event) => {
+            const selectedOption = event.target.value;
+
+            if (selectedOption === 'text') {
+                resultContainer.textContent = atob(result.base64);
+            } else if (selectedOption === 'base64') {
+                resultContainer.textContent = result.base64;
+            }
+        });
+  });
+</script>
