@@ -1,0 +1,6 @@
+<% content_for :title do %>
+  Auto-key Vigenere Cipher
+<% end %>
+<%= render :layout => "partials/cipher_form_partial", locals: { url: "/autokey-vigenere-cipher/calculate" } do %>
+   <%= render "params_field" %>
+<% end %>
