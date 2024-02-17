@@ -71,10 +71,3 @@ class HillCipherService
     end
   end
 end
-
-service = HillCipherService.new
-plain_text = 'paymoremoneyy'
-key = Matrix[[17, 17, 5], [21, 18, 21], [2, 2, 19]]
-cipher_text = service.encrypt(plain_text, key)
-puts cipher_text
-puts service.decrypt(cipher_text, key)
