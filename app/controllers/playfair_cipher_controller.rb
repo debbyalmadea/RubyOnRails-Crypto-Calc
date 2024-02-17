@@ -1,15 +1,15 @@
 class PlayfairCipherController < CipherController
   protected 
 
-  def _calculate(input, key, mode)
+  def _calculate(params)
     sv = PlayfairCipherService.new
-    matrix = sv.generate_matrix(key)
+    matrix = sv.generate_matrix(params[:key])
 
     result = ""
-    if mode == "encrypt"
-      result = sv.encrypt(input, matrix)
+    if params[:mode] == "encrypt"
+      result = sv.encrypt(params[:input], matrix)
     else
-      result = sv.decrypt(input, matrix)
+      result = sv.decrypt(params[:input], matrix)
     end
 
     return result, {gen_matrix: matrix}

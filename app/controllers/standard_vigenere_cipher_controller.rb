@@ -13,4 +13,4 @@ class StandardVigenereCipherController < CipherController
   
       return result
     end
-  end
+end

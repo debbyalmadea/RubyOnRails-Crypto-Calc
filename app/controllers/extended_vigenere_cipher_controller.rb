@@ -1,12 +1,12 @@
 class ExtendedVigenereCipherController < CipherController
   protected 
 
-  def _calculate(input, key, mode)
+  def _calculate(params)
     result = ""
-    if mode == "encrypt"
-      result = ExtendedVigenereCipherService.new.encrypt(input, key)
+    if params[:mode] == "encrypt"
+      result = ExtendedVigenereCipherService.new.encrypt(params[:input], params[:key])
     else
-      result = ExtendedVigenereCipherService.new.decrypt(input, key)
+      result = ExtendedVigenereCipherService.new.decrypt(params[:input], params[:key])
     end
 
     return result

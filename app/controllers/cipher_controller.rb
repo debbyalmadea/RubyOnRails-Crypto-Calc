@@ -7,8 +7,6 @@ class CipherController < ApplicationController
 
     def calculate
         input_type = params[:input_type]
-        key = params[:key]
-        mode = params[:mode]
         input = ""
         media_type = ""
 
@@ -21,7 +19,7 @@ class CipherController < ApplicationController
         else
             input = params[:input_file].read
             media_type = params[:input_file].content_type
-            if mode == "decrypt"
+            if params[:mode] == "decrypt"
                 split = input.split(';base64,')
                 puts split[0]
                 if split.length > 1
@@ -34,20 +32,18 @@ class CipherController < ApplicationController
             end
         end
 
-        result, other = _calculate(input, key, mode)
+        params[:input] = input
+        result, other = _calculate(params)
 
-        render json: { base64: Base64.encode64(result), mode: mode, media_type: media_type, other: other}
+        render json: { base64: Base64.encode64(result), mode: params[:mode], media_type: media_type, other: other}
     end
 
     protected 
 
     # _calculate is a method that should be implemented by the subclass
-    # @Param input [String] the input to be encrypted or decrypted
-    # @Param key [String] the key to be used for encryption or decryption
-    # @Param mode [String] the mode of operation (encrypt or decrypt)
-    # @Param media_type [String] the media type of the input
-    # @Return [String, String] the result of the encryption or decryption and the MIME type of the result
-    def _calculate(input, key, mode, media_type)
+    # @Param [Hash] params the parameters for the calculation
+    # @Return [String, Object] the result of the calculation and any other data that should be returned
+    def _calculate(params)
         raise NotImplementedError
     end
 end
