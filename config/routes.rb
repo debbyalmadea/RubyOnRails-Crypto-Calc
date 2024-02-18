@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   # Defines the root path route ("/")
-  # root "home#index"
+  root "standard_vigenere_cipher#index"
 
   # Defines the route for the Vigenere Cipher
   get "standard-vigenere-cipher" => "standard_vigenere_cipher#index"
@@ -27,6 +27,10 @@ Rails.application.routes.draw do
   # Defines the route for the Hill Cipher
   get "hill-cipher" => "hill_cipher#index"
   post "hill-cipher/calculate" => "hill_cipher#calculate"
+
+  # Defines the route for the Affine Cipher
+  get "affine-cipher" => "affine_cipher#index"
+  post "affine-cipher/calculate" => "affine_cipher#calculate"
 
   # Defines the route for the Super Encryption
   get "super-encryption" => "super_encryption#index"

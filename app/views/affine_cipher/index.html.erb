@@ -1,0 +1,6 @@
+<% content_for :title do %>
+  Affine Cipher
+<% end %>
+<%= render :layout => "partials/cipher_form_partial", locals: { url: "/affine-cipher/calculate" } do %>
+   <%= render "params_field" %>
+<% end %>

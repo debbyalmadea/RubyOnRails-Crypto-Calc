@@ -69,6 +69,11 @@
         })
         .then(response => response.json())
         .then(json => {
+            if (json.error) {
+                toastr.error(json.error);
+                return;
+            }
+
             const resultContainer = document.getElementById('result');
 
             result = json;

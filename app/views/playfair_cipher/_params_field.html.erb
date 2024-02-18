@@ -14,29 +14,25 @@
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const form = document.getElementById('form');
+    document.getElementById('form').removeEventListener('submit', (event) => {
+        submit(form, event);
+    });
 
-        form.removeEventListener('submit', (event) => {
-            submit(form, event);
-        });
-
-        form.addEventListener('submit', (event) => {
-            submit(form, event, (result) => {
-                const generatedMatrix = document.getElementById('generated-matrix');
-                const tableBody = generatedMatrix.querySelector('tbody');
-                tableBody.innerHTML = '';
-                for (let i = 0; i < result.other.gen_matrix.length; i++) {
-                    const row = document.createElement('tr');
-                    for (let j = 0; j < result.other.gen_matrix[i].length; j++) {
-                        const cell = document.createElement('td');
-                        cell.textContent = result.other.gen_matrix[i][j];
-                        row.appendChild(cell);
-                    }
-                    tableBody.appendChild(row);
+    document.getElementById('form').addEventListener('submit', (event) => {
+        submit(form, event, (result) => {
+            const generatedMatrix = document.getElementById('generated-matrix');
+            const tableBody = generatedMatrix.querySelector('tbody');
+            tableBody.innerHTML = '';
+            for (let i = 0; i < result.other.gen_matrix.length; i++) {
+                const row = document.createElement('tr');
+                for (let j = 0; j < result.other.gen_matrix[i].length; j++) {
+                    const cell = document.createElement('td');
+                    cell.textContent = result.other.gen_matrix[i][j];
+                    row.appendChild(cell);
                 }
-                generatedMatrix.style.display = 'block';
-            });
+                tableBody.appendChild(row);
+            }
+            generatedMatrix.style.display = 'block';
         });
     });
 </script>
