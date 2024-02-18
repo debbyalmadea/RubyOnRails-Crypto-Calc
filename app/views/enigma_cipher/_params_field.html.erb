@@ -1,4 +1,11 @@
 <div class="form-group mb-3">
+    <div class="form-group row">
+        <%= label_tag :type, "Machine Type:", class: "col-form-label col-md-2" %>
+        <div class="col-md-10 d-flex">
+            <%= select_tag :type, options_for_select([["Wehrmacht/Luftwaffe 3", 1], ["Kriegsmarine M3", 2]], 1), class: "form-control", required: true %>
+        </div>
+    </div>
+
     <table class="table">
         <tbody>
             <tr>

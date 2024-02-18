@@ -4,6 +4,10 @@
 class EnigmaConfiguration
   # Enigma configuration
 
+  # Type:
+  # 1: Wehrmacht/Luftwaffe 3
+  # 2: Kriegsmarine M3
+
   # Reflector:
   # 1: B
   # 2: C
@@ -31,11 +35,21 @@ class EnigmaConfiguration
   attr_reader :reflector, :plugboard, :rotors, :rotor_positions, :ring_settings
 
   def initialize
+    @type = 1
     @reflector = 1
     @plugboard = ''
     @rotors = [1, 2, 3]
     @rotor_positions = [0, 0, 0]
     @ring_settings = [0, 0, 0]
+  end
+
+  # @param type [Integer]
+  # @return [Integer]
+  # @raise [ArgumentError]
+  def type=(type)
+    raise ArgumentError, 'Not a valid value for type' unless [1, 2].include?(type)
+
+    @type = type
   end
 
   # @param reflector [Integer]
@@ -64,6 +78,8 @@ class EnigmaConfiguration
   def rotors=(rotors)
     raise ArgumentError, 'The number of rotors must be 3' unless rotors.length == 3
     raise ArgumentError, 'Not a valid value for rotors' unless rotors.all? { |rotor| (1..8).include?(rotor) }
+    raise ArgumentError, 'Rotors must be unique' unless rotors.uniq.length == 3
+    raise ArgumentError, 'Wehrmacht/Luftwaffe 3 only supports rotors I, II, III, IV, V' if @type == 1 && rotors.any? { |rotor| (6..8).include?(rotor) }
 
     @rotors = rotors
   end

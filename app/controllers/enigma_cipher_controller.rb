@@ -5,6 +5,7 @@ class EnigmaCipherController < CipherController
     sv = EnigmaCipherService.new
 
     configuration = EnigmaConfiguration.new
+    configuration.type = params[:type].to_i
     configuration.reflector = params[:rf].to_i
     configuration.plugboard = params[:pb]
     configuration.rotors = [params[:rt1].to_i, params[:rt2].to_i, params[:rt3].to_i]
