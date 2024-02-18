@@ -1,0 +1,17 @@
+<div class="form-group mb-3">
+    <%= label_tag :key, "Key:" %><br>
+    
+    <small class="form-text text-muted">
+        <strong>Format:</strong> <br>
+        Matrix Size <br>
+        m[0][0] m[0][1] ... m[0][n-1] <br>
+        m[1][0] m[1][1] ... m[1][n-1] <br>
+        ... <br>
+        <strong>Example:</strong> <br>
+        2 <br>
+        1 2 <br>
+        3 4 <br>
+    </small>
+    
+    <%= text_area_tag :key, nil, class: "form-control", required: true, rows: 5 %>
+</div>
