@@ -1,8 +1,8 @@
-class StandardVigenereCipherController < CipherController
+class SuperEncryptionController < CipherController
     protected 
   
     def _calculate(params)
-      sv = StandardVigenereService.new
+      sv = SuperEncryptionService.new
   
       result = ""
       if params[:mode] == "encrypt"
