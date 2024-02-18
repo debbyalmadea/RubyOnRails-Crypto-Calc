@@ -23,7 +23,7 @@ class EnigmaCipherService
   # @param plain_text [String]
   # @param configuration [EnigmaConfiguration]
   # @return [String]
-  def encrypt(plain_text, configuration, debug = false)
+  def encrypt(plain_text, configuration)
     plugboard_hash = {}
     configuration.plugboard.split(' ').each do |pair|
       plugboard_hash[pair[0]] = pair[1]
@@ -48,23 +48,14 @@ class EnigmaCipherService
       end
 
       char = process_plugboard(char, plugboard_hash)
-      puts char if debug
       char = process_rotor(char, rotor_positions[2], ROTOR_CONFIGURATIONS[configuration.rotors[2]])
-      puts char if debug
       char = process_rotor(char, rotor_positions[1], ROTOR_CONFIGURATIONS[configuration.rotors[1]])
-      puts char if debug
       char = process_rotor(char, rotor_positions[0], ROTOR_CONFIGURATIONS[configuration.rotors[0]])
-      puts char if debug
       char = process_reflector(char, configuration.reflector)
-      puts char if debug
       char = process_rotor_inverted(char, rotor_positions[0], ROTOR_CONFIGURATIONS[configuration.rotors[0]])
-      puts char if debug
       char = process_rotor_inverted(char, rotor_positions[1], ROTOR_CONFIGURATIONS[configuration.rotors[1]])
-      puts char if debug
       char = process_rotor_inverted(char, rotor_positions[2], ROTOR_CONFIGURATIONS[configuration.rotors[2]])
-      puts char if debug
       char = process_plugboard(char, plugboard_hash)
-      puts char if debug
 
       cipher_text += char
     end
@@ -128,14 +119,3 @@ class EnigmaCipherService
     plain_text.upcase.gsub(/[^A-Z]/, '')
   end
 end
-
-# config = EnigmaConfiguration.new
-# config.reflector = 2
-# config.rotors = [4, 2, 3]
-# config.rotor_positions = %w[A A A]
-
-# service = EnigmaCipherService.new
-# plain_text = 'FFFFFF'
-# cipher_text = service.encrypt(plain_text, config)
-# puts cipher_text
-# puts service.decrypt(cipher_text, config)
