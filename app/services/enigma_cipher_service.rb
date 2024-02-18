@@ -48,13 +48,13 @@ class EnigmaCipherService
       end
 
       char = process_plugboard(char, plugboard_hash)
-      char = process_rotor(char, rotor_positions[2], ROTOR_CONFIGURATIONS[configuration.rotors[2]])
-      char = process_rotor(char, rotor_positions[1], ROTOR_CONFIGURATIONS[configuration.rotors[1]])
-      char = process_rotor(char, rotor_positions[0], ROTOR_CONFIGURATIONS[configuration.rotors[0]])
+      char = process_rotor(char, rotor_positions[2], configuration.rotors[2])
+      char = process_rotor(char, rotor_positions[1], configuration.rotors[1])
+      char = process_rotor(char, rotor_positions[0], configuration.rotors[0])
       char = process_reflector(char, configuration.reflector)
-      char = process_rotor_inverted(char, rotor_positions[0], ROTOR_CONFIGURATIONS[configuration.rotors[0]])
-      char = process_rotor_inverted(char, rotor_positions[1], ROTOR_CONFIGURATIONS[configuration.rotors[1]])
-      char = process_rotor_inverted(char, rotor_positions[2], ROTOR_CONFIGURATIONS[configuration.rotors[2]])
+      char = process_rotor_inverted(char, rotor_positions[0], configuration.rotors[0])
+      char = process_rotor_inverted(char, rotor_positions[1], configuration.rotors[1])
+      char = process_rotor_inverted(char, rotor_positions[2], configuration.rotors[2])
       char = process_plugboard(char, plugboard_hash)
 
       cipher_text += char
@@ -81,22 +81,22 @@ class EnigmaCipherService
 
   # @param letter [String]
   # @param rotor_position [Integer]
-  # @param rotor_configuration [String]
+  # @param rotor_type [Integer]
   # @return [String]
-  def process_rotor(letter, rotor_position, rotor_configuration)
-    result = rotor_configuration[(letter.ord - 'A'.ord + rotor_position) % 26]
+  def process_rotor(letter, rotor_position, rotor_type)
+    result = ROTOR_CONFIGURATIONS[rotor_type][(letter.ord - 'A'.ord + rotor_position) % 26]
     result = (result.ord - 'A'.ord - rotor_position) % 26
     (result + 'A'.ord).chr
   end
 
   # @param letter [String]
   # @param rotor_position [Integer]
-  # @param rotor_configuration [String]
+  # @param rotor_type [Integer]
   # @return [String]
-  def process_rotor_inverted(letter, rotor_position, rotor_configuration)
+  def process_rotor_inverted(letter, rotor_position, rotor_type)
     result = (letter.ord - 'A'.ord + rotor_position) % 26
 
-    rotor_configuration.each_char.with_index do |char, index|
+    ROTOR_CONFIGURATIONS[rotor_type].each_char.with_index do |char, index|
       if (char.ord - 'A'.ord) == result
         result = (index - rotor_position) % 26
         break
