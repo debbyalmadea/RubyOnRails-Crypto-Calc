@@ -1,0 +1,40 @@
+<div class="form-group mb-3">
+    <table class="table">
+        <tbody>
+            <tr>
+                <td class="align-middle">
+                    <div class="form-group row">
+                        <%= label_tag :rf, "Reflector:", class: "col-form-label col-md-5" %>
+                        <div class="col-md-7 d-flex">
+                            <%= select_tag :rf, options_for_select([["UKW-B", 1], ["UKW-C", 2]], nil), class: "form-control", required: true %>
+                        </div>
+                    </div>
+                </td>
+                <td class="align-middle">Slow Rotor</td>
+                <td class="align-middle">Middle Rotor</td>
+                <td class="align-middle">Fast Rotor</td>
+            </tr>
+            <tr>
+                <td class="align-middle">Rotor Type</td>
+                <td class="align-middle"><%= select_tag :rt1, options_for_select([["I", 1], ["II", 2], ["III", 3], ["IV", 4], ["V", 5], ["VI", 6], ["VII", 7], ["VIII", 8]], 1), class: "form-control", required: true %></td>
+                <td class="align-middle"><%= select_tag :rt2, options_for_select([["I", 1], ["II", 2], ["III", 3], ["IV", 4], ["V", 5], ["VI", 6], ["VII", 7], ["VIII", 8]], 2), class: "form-control", required: true %></td>
+                <td class="align-middle"><%= select_tag :rt3, options_for_select([["I", 1], ["II", 2], ["III", 3], ["IV", 4], ["V", 5], ["VI", 6], ["VII", 7], ["VIII", 8]], 3), class: "form-control", required: true %></td>
+            </tr>
+            <tr>
+                <td class="align-middle">Initial Position</td>
+                <td class="align-middle"><%= text_field_tag :rp1, 'A', class: "form-control", required: true %></td>
+                <td class="align-middle"><%= text_field_tag :rp2, 'A', class: "form-control", required: true %></td>
+                <td class="align-middle"><%= text_field_tag :rp3, 'A', class: "form-control", required: true %></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <%= label_tag :pb, "Plugboard:" %><br>
+    
+    <small class="form-text text-muted">
+        Format: Pair of letters separated by space <br>
+        Example: AB CD EF
+    </small>
+
+    <%= text_area_tag :pb, nil, class: "form-control", rows: 2 %>
+</div>

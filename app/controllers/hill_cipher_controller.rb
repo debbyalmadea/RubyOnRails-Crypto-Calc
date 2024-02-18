@@ -9,10 +9,10 @@ class HillCipherController < CipherController
       key = params[:key].split("\n")
       matrix_size = key[0].to_i
       key = key[1..].map { |row| row.split(' ').map(&:to_i) }
-      raise 'Invalid key (1)' if key.length != matrix_size
+      raise 'Matrix size does not match the key' if matrix_size != key.length
 
       key.each do |row|
-        raise 'Invalid key (2)' if row.length != matrix_size
+        raise 'Matrix size does not match the key' if matrix_size != row.length
       end
 
       key = Matrix[*key]

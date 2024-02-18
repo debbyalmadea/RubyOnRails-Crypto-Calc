@@ -73,7 +73,7 @@ class EnigmaConfiguration
     raise ArgumentError, 'The number of rotor positions must be 3' unless rotor_positions.length == 3
 
     is_rotor_position_valid = rotor_positions.all? { |position| position.match?(/^[A-Z]$/) }
-    raise ArgumentError, 'Not a valid value for rotor_positions' unless is_rotor_position_valid
+    raise ArgumentError, 'Rotor position must be a letter' unless is_rotor_position_valid
 
     @rotor_positions = rotor_positions.map { |position| position.ord - 'A'.ord }
   end

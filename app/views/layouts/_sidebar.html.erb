@@ -25,5 +25,8 @@
       <li class="mb-2 <%= request.path != "/super-encryption" && "nav-item" %>">
         <%= link_to "Super Encryption", "/super-encryption", class: "text-white nav-link #{request.path == "/super-encryption" && "active"}" %>
       </li>
+      <li class="mb-2 <%= request.path != "/enigma-cipher" && "nav-item" %>">
+        <%= link_to "Enigma Cipher", "/enigma-cipher", class: "text-white nav-link #{request.path == "/enigma-cipher" && "active"}" %>
+      </li>
     </ul>
 </div>

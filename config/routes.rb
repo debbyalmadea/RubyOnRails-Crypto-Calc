@@ -35,4 +35,8 @@ Rails.application.routes.draw do
   # Defines the route for the Super Encryption
   get "super-encryption" => "super_encryption#index"
   post "super-encryption/calculate" => "super_encryption#calculate"
+
+  # Defines the route for the Super Encryption
+  get "enigma-cipher" => "enigma_cipher#index"
+  post "enigma-cipher/calculate" => "enigma_cipher#calculate"
 end
