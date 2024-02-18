@@ -15,6 +15,17 @@ class EnigmaCipherService
     8 => 'FKQHTLXOCBJSPDZRAMEWNIUYGV'
   }.freeze
 
+  ROTOR_NOTCHES = {
+    1 => %w[Q],
+    2 => %w[E],
+    3 => %w[V],
+    4 => %w[J],
+    5 => %w[Z],
+    6 => %w[Z M],
+    7 => %w[Z M],
+    8 => %w[Z M]
+  }.freeze
+
   REFLECTOR_CONFIGURATIONS = {
     1 => 'YRUHQSLDPXNGOKMIEBFZCWVJAT',
     2 => 'FVPJIAOYEDRZXWGCTKUQSBNMHL'
@@ -35,26 +46,22 @@ class EnigmaCipherService
 
     rotor_positions = configuration.rotor_positions.dup
     plain_text.each_char do |char|
-      rotor_positions[2] = rotor_positions[2] + 1
-
-      if rotor_positions[2] == 26
-        rotor_positions[1] = rotor_positions[1] + 1
-        rotor_positions[2] = 0
-      end
-
-      if rotor_positions[1] == 26
-        rotor_positions[0] = (rotor_positions[0] + 1) % 26
-        rotor_positions[1] = 0
+      rotor_positions[2] = (rotor_positions[2] + 1) % 26
+      if ROTOR_NOTCHES[configuration.rotors[2]].include?(((rotor_positions[2] - 1) % 26 + 'A'.ord).chr)
+        rotor_positions[1] = (rotor_positions[1] + 1) % 26
+        if ROTOR_NOTCHES[configuration.rotors[1]].include?(((rotor_positions[1] - 1) % 26 + 'A'.ord).chr)
+          rotor_positions[0] = (rotor_positions[0] + 1) % 26
+        end
       end
 
       char = process_plugboard(char, plugboard_hash)
-      char = process_rotor(char, rotor_positions[2], configuration.rotors[2])
-      char = process_rotor(char, rotor_positions[1], configuration.rotors[1])
-      char = process_rotor(char, rotor_positions[0], configuration.rotors[0])
+      char = process_rotor(char, configuration.rotors[2], rotor_positions[2], configuration.ring_settings[2])
+      char = process_rotor(char, configuration.rotors[1], rotor_positions[1], configuration.ring_settings[1])
+      char = process_rotor(char, configuration.rotors[0], rotor_positions[0], configuration.ring_settings[0])
       char = process_reflector(char, configuration.reflector)
-      char = process_rotor_inverted(char, rotor_positions[0], configuration.rotors[0])
-      char = process_rotor_inverted(char, rotor_positions[1], configuration.rotors[1])
-      char = process_rotor_inverted(char, rotor_positions[2], configuration.rotors[2])
+      char = process_rotor_inverted(char, configuration.rotors[0], rotor_positions[0], configuration.ring_settings[0])
+      char = process_rotor_inverted(char, configuration.rotors[1], rotor_positions[1], configuration.ring_settings[1])
+      char = process_rotor_inverted(char, configuration.rotors[2], rotor_positions[2], configuration.ring_settings[2])
       char = process_plugboard(char, plugboard_hash)
 
       cipher_text += char
@@ -83,9 +90,12 @@ class EnigmaCipherService
   # @param rotor_position [Integer]
   # @param rotor_type [Integer]
   # @return [String]
-  def process_rotor(letter, rotor_position, rotor_type)
-    result = ROTOR_CONFIGURATIONS[rotor_type][(letter.ord - 'A'.ord + rotor_position) % 26]
-    result = (result.ord - 'A'.ord - rotor_position) % 26
+  def process_rotor(letter, rotor_type, rotor_position, ring_setting)
+    temp = (rotor_position - ring_setting) % 26
+
+    result = (letter.ord - 'A'.ord + temp) % 26
+    result = ROTOR_CONFIGURATIONS[rotor_type][result]
+    result = (result.ord - 'A'.ord - temp) % 26
     (result + 'A'.ord).chr
   end
 
@@ -93,12 +103,13 @@ class EnigmaCipherService
   # @param rotor_position [Integer]
   # @param rotor_type [Integer]
   # @return [String]
-  def process_rotor_inverted(letter, rotor_position, rotor_type)
-    result = (letter.ord - 'A'.ord + rotor_position) % 26
+  def process_rotor_inverted(letter, rotor_type, rotor_position, ring_setting)
+    temp = (rotor_position - ring_setting) % 26
+    result = (letter.ord - 'A'.ord + temp) % 26
 
     ROTOR_CONFIGURATIONS[rotor_type].each_char.with_index do |char, index|
       if (char.ord - 'A'.ord) == result
-        result = (index - rotor_position) % 26
+        result = (index - temp) % 26
         break
       end
     end

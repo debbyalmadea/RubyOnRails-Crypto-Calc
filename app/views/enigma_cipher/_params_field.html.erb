@@ -21,6 +21,12 @@
                 <td class="align-middle"><%= select_tag :rt3, options_for_select([["I", 1], ["II", 2], ["III", 3], ["IV", 4], ["V", 5], ["VI", 6], ["VII", 7], ["VIII", 8]], 3), class: "form-control", required: true %></td>
             </tr>
             <tr>
+                <td class="align-middle">Ring Settings</td>
+                <td class="align-middle"><%= text_field_tag :rs1, 'A', class: "form-control", required: true %></td>
+                <td class="align-middle"><%= text_field_tag :rs2, 'A', class: "form-control", required: true %></td>
+                <td class="align-middle"><%= text_field_tag :rs3, 'A', class: "form-control", required: true %></td>
+            </tr>
+            <tr>
                 <td class="align-middle">Initial Position</td>
                 <td class="align-middle"><%= text_field_tag :rp1, 'A', class: "form-control", required: true %></td>
                 <td class="align-middle"><%= text_field_tag :rp2, 'A', class: "form-control", required: true %></td>

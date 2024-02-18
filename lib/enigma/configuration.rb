@@ -27,13 +27,15 @@ class EnigmaConfiguration
   # @param plugboard [String]
   # @param rotors [Array<Integer>]
   # @param rotor_positions [Array<Integer>]
-  attr_reader :reflector, :plugboard, :rotors, :rotor_positions
+  # @param ring_settings [Array<Integer>]
+  attr_reader :reflector, :plugboard, :rotors, :rotor_positions, :ring_settings
 
   def initialize
     @reflector = 1
     @plugboard = ''
     @rotors = [1, 2, 3]
     @rotor_positions = [0, 0, 0]
+    @ring_settings = [0, 0, 0]
   end
 
   # @param reflector [Integer]
@@ -76,5 +78,17 @@ class EnigmaConfiguration
     raise ArgumentError, 'Rotor position must be a letter' unless is_rotor_position_valid
 
     @rotor_positions = rotor_positions.map { |position| position.ord - 'A'.ord }
+  end
+
+  # @param ring_settings [Array<String>]
+  # @return [Array<Integer>]
+  # @raise [ArgumentError]
+  def ring_settings=(ring_settings)
+    raise ArgumentError, 'The number of ring settings must be 3' unless ring_settings.length == 3
+
+    is_ring_setting_valid = ring_settings.all? { |setting| setting.match?(/^[A-Z]$/) }
+    raise ArgumentError, 'Ring setting must be a letter' unless is_ring_setting_valid
+
+    @ring_settings = ring_settings.map { |setting| setting.ord - 'A'.ord }
   end
 end
