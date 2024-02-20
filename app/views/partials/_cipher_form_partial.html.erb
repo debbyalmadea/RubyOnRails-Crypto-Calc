@@ -48,7 +48,9 @@
     </div>
 
     <button id="download-button" class="btn btn-primary mb-3" style="display: none;">Download File</button>
-    <div id="result" class="border p-2"></div>
+    <div>
+        <p id="result" class="border p-2 mw-100 text-break"></p>
+    </div>
 </div>
 
 <script>    
@@ -157,9 +159,9 @@
         const selectedOption = event.target.value;
 
         if (selectedOption === 'text') {
-            resultContainer.textContent = atob(result.base64);
+            resultContainer.innerHTML = atob(result.base64).replace('\r\n', '<br>')
         } else if (selectedOption === 'base64') {
-            resultContainer.textContent = result.base64;
+            resultContainer.innerHTML = result.base64
         }
     });
 </script>
