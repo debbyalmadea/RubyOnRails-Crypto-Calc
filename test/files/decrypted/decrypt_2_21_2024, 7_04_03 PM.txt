@@ -1,0 +1,19 @@
+Selamat siang!
+
+Sebelumnya, para asisten ingin berterima kasih atas usaha yang kalian berikan karena telah mengikuti seluruh rangkaian seleksi Lab Programming. Sebelum kita menuju ke hasil, kita akan mereviu dahulu tugas-tugas yang telah kalian kerjakan. 
+
+Pada seleksi 1, kalian diminta untuk mengumpulkan berkas di borang yang disediakan untuk seleksi administrasi. Pada seleksi 2, kalian diminta untuk membuat kode yang dapat menyelesaikan permasalahan tertentu. Sedangkan pada Seleksi 3 yang telah dilalui, kalian diminta untuk membuat aplikasi web yang terdiri dari Monolith and Single Service. Disamping itu, kalian juga diarahkan untuk menggunakan kakas dan teknologi seperti Docker, Google Lighthouse, Wireshark, dan menerapkan pola desain (design pattern) yang telah kalian pelajari di OOP.  Meskipun beberapa tugas tersebut ada yang belum kalian pelajari atau dengar sebelumnya, tetapi percayalah, tugas tersebut akan berguna untuk masa depan kalian di IF/STI. Terakhir, kalian juga telah melewati masa-masa interviu bersama para asisten dengan berbagai studi kasus yang diberikan dan pertanyaan tentang penilaian teknikal.
+
+Memang soal yang dibuat jauh dari sempurna. Hal ini tentu karena manusia yang membuatnya juga tidak sempurna. Namun, kami sangat mengapresiasi bagi kalian yang telah mengerjakan soal-soal tersebut dengan baik. Untuk menghargai kerja keras kalian, kami ingin mengumumkan hasil seleksi labpro yang kalian jalani selama ini. Namun, sangat disayangkan bahwa kamu:
+
+TIDAK LOLOS
+
+Semoga kamu bisa mendapat banyak pelajaran setelah bekerja keras mengikuti seluruh rangkaian seleksi labpro ini. Kami percaya bahwa kamu dapat mencapai mimpi-mimpimu lewat banyak jalan, tetapi sayangnya, labpro bukan jalanmu mencapai mimpi-mimpi itu. Bukan berarti kamu kurang baik, tetapi diseleksi ini kami harus memilih yang sesuai dengan labpro. Tetap semangat! 
+
+Tenang saudaraku, tulisan di atas hanya prank, keseluruhan performa kalian sudah kami reviu dan hasilnya memuaskan. Selain itu, kami juga ingin mengucapkan selamat karena kamu telah berhasil melewati seluruh seleksi Lab Programming. Abaikan tulisan besar dan paragraf sebelum ini. 
+
+Selamat, kalian telah menyelesaikan semua tahap dari rangkaian seleksi ini. Silahkan masuk ke grup line melalui pranala berikut: <redacted>
+
+Marcellus Michael Herman Kahari
+Koordinator Open House Lab Laboratorium Programming
+Institut Teknologi Bandung—Œ‘™Ÿš—

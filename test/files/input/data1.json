@@ -1,0 +1,93 @@
+[
+    {
+      "id": 1,
+      "name": "John Doe",
+      "age": 35,
+      "gender": "Male",
+      "email": "john.doe@example.com",
+      "phone": "+1234567890",
+      "address": "123 Main Street, Cityville, USA"
+    },
+    {
+      "id": 2,
+      "name": "Jane Smith",
+      "age": 28,
+      "gender": "Female",
+      "email": "jane.smith@example.com",
+      "phone": "+1987654321",
+      "address": "456 Elm Street, Townsville, USA"
+    },
+    {
+      "id": 3,
+      "name": "Michael Johnson",
+      "age": 42,
+      "gender": "Male",
+      "email": "michael.johnson@example.com",
+      "phone": "+1122334455",
+      "address": "789 Oak Street, Villagetown, USA"
+    },
+    {
+      "id": 4,
+      "name": "Emily Brown",
+      "age": 31,
+      "gender": "Female",
+      "email": "emily.brown@example.com",
+      "phone": "+1555666777",
+      "address": "321 Pine Street, Hamletville, USA"
+    },
+    {
+      "id": 5,
+      "name": "David Martinez",
+      "age": 39,
+      "gender": "Male",
+      "email": "david.martinez@example.com",
+      "phone": "+1444333222",
+      "address": "555 Cedar Street, Ruralville, USA"
+    },
+    {
+      "id": 6,
+      "name": "Sarah Wilson",
+      "age": 25,
+      "gender": "Female",
+      "email": "sarah.wilson@example.com",
+      "phone": "+1666777888",
+      "address": "777 Maple Street, Suburbia, USA"
+    },
+    {
+      "id": 7,
+      "name": "James Lee",
+      "age": 45,
+      "gender": "Male",
+      "email": "james.lee@example.com",
+      "phone": "+1777888999",
+      "address": "999 Birch Street, Metropolis, USA"
+    },
+    {
+      "id": 8,
+      "name": "Amanda Taylor",
+      "age": 29,
+      "gender": "Female",
+      "email": "amanda.taylor@example.com",
+      "phone": "+1888999000",
+      "address": "1010 Willow Street, Megalopolis, USA"
+    },
+    {
+      "id": 9,
+      "name": "Christopher Anderson",
+      "age": 37,
+      "gender": "Male",
+      "email": "christopher.anderson@example.com",
+      "phone": "+1999000111",
+      "address": "1212 Spruce Street, Gigacity, USA"
+    },
+    {
+      "id": 10,
+      "name": "Jessica Garcia",
+      "age": 33,
+      "gender": "Female",
+      "email": "jessica.garcia@example.com",
+      "phone": "+1666555444",
+      "address": "1313 Fir Street, Microville, USA"
+    }
+  ]
+  

@@ -185,6 +185,15 @@
 
     document.getElementById('input_file').addEventListener('change', () => {
         resetResult();
+
+        // check file size max 2 MB
+        const fileInput = document.getElementById('input_file');
+        const file = fileInput.files[0];
+
+        if (file.size > 2 * 1024 * 1024) {
+            toastr.error('File size must be less than 2 MB');
+            fileInput.value = "";
+        }
     });
 
     document.getElementById('input_text').addEventListener('input', () => {
