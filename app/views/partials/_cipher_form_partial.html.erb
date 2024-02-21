@@ -47,6 +47,11 @@
         <%= label_tag :displayFormat_text, 'Plain Text', for: 'plain-text-display' %>
     </div>
 
+    <div id="loading-spinner" style="display: none;" >
+        <div class="spinner-border text-primary" role="status">
+        </div>
+    </div>
+
     <button id="download-button" class="btn btn-primary mb-3" style="display: none;">Download File</button>
     <div>
         <p id="result" class="border p-2 mw-100 text-break"></p>
@@ -64,6 +69,9 @@
         event.preventDefault();
 
         const formData = new FormData(form);
+        const loadingSpinner = document.getElementById('loading-spinner');
+
+        loadingSpinner.style.display = "block";
 
         fetch(form.action, {
             method: form.method,
@@ -71,6 +79,8 @@
         })
         .then(response => response.json())
         .then(json => {
+            loadingSpinner.style.display = "none";
+            
             if (json.error) {
                 toastr.error(json.error);
                 return;
@@ -163,6 +173,22 @@
         } else if (selectedOption === 'base64') {
             resultContainer.innerHTML = result.base64
         }
+    });
+</script>
+
+<script>
+    function resetResult() {
+        const resultContainer = document.getElementById('result');  
+        resultContainer.innerHTML = "";
+        document.getElementById('download-button').style.display = "none";
+    }
+
+    document.getElementById('input_file').addEventListener('change', () => {
+        resetResult();
+    });
+
+    document.getElementById('input_text').addEventListener('input', () => {
+        resetResult();
     });
 </script>
 
