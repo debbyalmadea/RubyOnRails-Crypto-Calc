@@ -1,24 +1,23 @@
-# README
+# Cryptography Calculator
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a cryptography calculator built using Ruby on Rails Framework. This app can be used to encrypt and decrypt multiple ciphers, including Vigenere, Affine, Playfair, Enigma, etc.
 
-Things you may want to cover:
+## Ciphers Supported
+1. Standard Vigenere Cipher
+2. Autokey Vigenere Cipher
+3. Extended Vigenere Cipher
+4. Playfair Cipher
+5. Affine Cipher
+6. Hill Cipher
+7. Super Encryption (Combination of Extended Vigenere Cipher and Transposition Cipher)
+8. Enigma Cipher
 
-* Ruby version
+## How to Run
+1. Clone or download this repository
+2. Open the repository folder in terminal
+3. Run `rails server` command
+4. The app can be accessed in `http://localhost:3000`
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Created By
+- [Farhan Nabil Suryono](https://www.github.com/Altair1618)
+- [Made Debby Almadea Putri](https://www.github.com/debbyalmadea)
