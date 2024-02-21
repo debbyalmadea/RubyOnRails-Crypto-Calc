@@ -9,6 +9,7 @@ class HillCipherService
   # @return [String]
   def encrypt(plain_text, key)
     raise ArgumentError, 'Invalid key, matrix must be invertible' unless key.regular?
+    raise ArgumentError, 'Invalid key, matrix doesn\'t have mod inverse' unless has_mod_inverse?(key.determinant, 26)
 
     plain_text = preprocess_text(plain_text, key)
 
@@ -33,6 +34,7 @@ class HillCipherService
   # @return [String]
   def decrypt(cipher_text, key)
     raise ArgumentError, 'Invalid key, matrix must be invertible' unless key.regular?
+    raise ArgumentError, 'Invalid key, matrix doesn\'t have mod inverse' unless has_mod_inverse?(key.determinant, 26)
 
     plain_text = ''
     (0..cipher_text.length / key.row_size - 1).each do |i|
@@ -69,5 +71,15 @@ class HillCipherService
     (1..mod).each do |i|
       return i if (num * i) % mod == 1
     end
+  end
+
+  # @param num [Integer]
+  # @param mod [Integer]
+  # @return [Boolean]
+  def has_mod_inverse?(num, mod)
+    (1..mod).each do |i|
+      return true if (num * i) % mod == 1
+    end
+    false
   end
 end
